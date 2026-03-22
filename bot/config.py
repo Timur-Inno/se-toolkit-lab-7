@@ -1,7 +1,7 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env.bot.secret", extra="ignore")
+    model_config = SettingsConfigDict(env_file=["../.env.bot.secret", ".env.bot.secret"], extra="ignore")
     bot_token: str = ""
     lms_api_base_url: str = "http://localhost:42002"
     lms_api_key: str = ""
