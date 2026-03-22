@@ -1,5 +1,5 @@
 def handle_start() -> str:
-    return "Welcome to the LMS Bot! Use /help to see available commands."
+    return "Welcome to the LMS Bot!\nI can answer questions about labs, scores, and learners.\nUse /help for commands, or just ask me anything!"
 
 def handle_help() -> str:
     return (
@@ -8,7 +8,11 @@ def handle_help() -> str:
         "/help — Show this help\n"
         "/health — Check backend status\n"
         "/labs — List available labs\n"
-        "/scores <lab> — Per-task pass rates for a lab"
+        "/scores <lab> — Per-task pass rates for a lab\n\n"
+        "Or just ask in plain text, e.g.:\n"
+        "• which lab has the lowest pass rate?\n"
+        "• who are the top 5 students in lab 4?\n"
+        "• how many students are enrolled?"
     )
 
 def handle_health() -> str:
@@ -50,3 +54,10 @@ def handle_scores(args: str = "") -> str:
 
 def handle_unknown(cmd: str) -> str:
     return f"Unknown command: {cmd}. Use /help to see available commands."
+
+def handle_nl(text: str) -> str:
+    try:
+        from services.llm_router import route
+        return route(text)
+    except Exception as e:
+        return f"LLM error: {e}"
