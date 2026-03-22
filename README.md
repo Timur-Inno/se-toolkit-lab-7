@@ -95,3 +95,19 @@ By the end of this lab, you should be able to say:
 ### Optional
 
 1. [Flutter Web Chatbot](./lab/tasks/optional/task-1.md)
+
+## Deploy
+
+### Environment variables
+Copy `.env.docker.secret` and fill in required values (bot token, DB credentials, etc.).
+
+### Run with Docker Compose
+```bash
+docker compose --env-file .env.docker.secret up --build -d
+```
+
+### Verify
+```bash
+docker compose --env-file .env.docker.secret ps
+docker compose --env-file .env.docker.secret logs bot
+```
